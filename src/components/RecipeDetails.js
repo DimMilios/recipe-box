@@ -9,19 +9,23 @@ function RecipeDetails({ title, ingredients, directions }) {
         <div>
           <div>
             <h3>Ingredients</h3>
-            {ingredients.map(ingredient => (
-              <div key={crypto.getRandomValues(new Uint8Array(30)).toString()}>
-                {ingredient.description}
-              </div>
-            ))}
+            <ul>
+              {ingredients[0].description.map(description => (
+                <li key={crypto.getRandomValues(new Uint8Array(30)).toString()}>
+                  {description}
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
             <h3>Directions</h3>
-            {directions.map(direction => (
-              <div key={crypto.getRandomValues(new Uint8Array(30)).toString()}>
-                {direction}
-              </div>
-            ))}
+            <ol>
+              {directions.map(direction => (
+                <li key={crypto.getRandomValues(new Uint8Array(30)).toString()}>
+                  {direction}
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       )}

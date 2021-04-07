@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { recipes as recipeData } from './recipes';
+// import { recipes as recipeData } from './recipes';
 import RecipeList from './components/RecipeList';
 import AddRecipe from './components/AddRecipe';
 
@@ -10,8 +10,17 @@ function App() {
   const [ingredients, setIngredients] = useState('');
   const [directions, setDirections] = useState('');
 
+  const prefix = '_username_recipes';
+
   useEffect(() => {
-    setRecipes(recipeData);
+    // setRecipes(recipeData);
+
+    setRecipes(
+      Object.entries(localStorage).reduce((array, [key, value]) => {
+        if (key in array || !key?.startsWith(prefix)) return [];
+        return array.concat(JSON.parse(value));
+      }, [])
+    );
   }, []);
 
   const handleSubmit = event => {
@@ -24,6 +33,9 @@ function App() {
       directions: directions.split('\\'),
     };
     console.log('new recipe', recipeToAdd);
+
+    localStorage.setItem(`${prefix}-${name}`, JSON.stringify(recipeToAdd));
+
     setRecipes([...recipes, recipeToAdd]);
     setName('');
     setIngredients('');
