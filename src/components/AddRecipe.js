@@ -1,4 +1,4 @@
-export function AddRecipe({
+function AddRecipe({
   name,
   ingredients,
   directions,
@@ -41,3 +41,5 @@ export function AddRecipe({
     </form>
   );
 }
+
+export default AddRecipe;

@@ -1,6 +1,6 @@
-import { RecipeDetails } from './RecipeDetails';
+import RecipeDetails from './RecipeDetails';
 
-export function RecipeList({ recipes }) {
+function RecipeList({ recipes }) {
   return (
     <ul>
       {recipes.map(recipe => {
@@ -14,3 +14,5 @@ export function RecipeList({ recipes }) {
     </ul>
   );
 }
+
+export default RecipeList;

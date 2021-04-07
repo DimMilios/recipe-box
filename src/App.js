@@ -1,8 +1,8 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { recipes as recipeData } from './recipes';
-import { RecipeList } from './components/RecipeList';
-import { AddRecipe } from './components/AddRecipe';
+import RecipeList from './components/RecipeList';
+import AddRecipe from './components/AddRecipe';
 
 function App() {
   const [recipes, setRecipes] = useState([]);

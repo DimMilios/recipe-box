@@ -1,6 +1,6 @@
 import { useToggle } from '../hooks/useToggle';
 
-export function RecipeDetails({ title, ingredients, directions }) {
+function RecipeDetails({ title, ingredients, directions }) {
   const [visible, toggle] = useToggle(false);
   return (
     <li>
@@ -28,3 +28,5 @@ export function RecipeDetails({ title, ingredients, directions }) {
     </li>
   );
 }
+
+export default RecipeDetails;
