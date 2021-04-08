@@ -1,10 +1,13 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import RecipeList from './components/RecipeList';
+import { recipes as data } from './recipes';
 import AddRecipe from './components/AddRecipe';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
+  const [loadedRecipes, setLoadedRecipes] = useState(false);
+
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [directions, setDirections] = useState('');
@@ -12,13 +15,16 @@ function App() {
   const prefix = '_fcce5c90958-c559-42db-9fca-cc42317b48f8_recipes';
 
   useEffect(() => {
-    setRecipes(
-      Object.entries(localStorage).reduce((array, [key, value]) => {
+    const storedRecipes = Object.entries(localStorage).reduce(
+      (array, [key, value]) => {
         if (key in array || !key?.startsWith(prefix)) return [];
-        return array.concat(JSON.parse(value));
-      }, [])
+        return array.concat({ localStorageKey: key, ...JSON.parse(value) });
+      },
+      []
     );
-  }, []);
+
+    setRecipes(storedRecipes);
+  }, [loadedRecipes]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -51,9 +57,30 @@ function App() {
     setDirections(event.currentTarget.value);
   };
 
+  const handleDelete = title => {
+    const recipeToDelete = recipes.find(recipe => recipe.title === title);
+
+    if (recipeToDelete) {
+      localStorage.removeItem(recipeToDelete.localStorageKey);
+      setRecipes(
+        recipes.filter(
+          recipe => recipe.localStorageKey !== recipeToDelete.localStorageKey
+        )
+      );
+    }
+  };
+
+  const handleLoadRecipes = () => {
+    data.forEach(recipe => {
+      recipe.localStorageKey = `${prefix}-${recipe.title}`;
+      localStorage.setItem(recipe.localStorageKey, JSON.stringify(recipe));
+    });
+    setLoadedRecipes(true);
+  };
+
   return (
-    <div>
-      <RecipeList recipes={recipes} />
+    <>
+      <RecipeList recipes={recipes} handleDelete={handleDelete} />
 
       <AddRecipe
         name={name}
@@ -64,7 +91,9 @@ function App() {
         handleIngredientsChange={handleIngredientsChange}
         handleDirectionsChange={handleDirectionsChange}
       />
-    </div>
+
+      <button onClick={handleLoadRecipes}>Load recipes from file</button>
+    </>
   );
 }
 
