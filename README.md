@@ -4,11 +4,15 @@
 
 - [] I can create recipes that have names and ingredients.
 
+  - [] Use a modal.
+
 - [x] I can see an index view where the names of all the recipes are visible.
 
 - [x] I can click into any of those recipes to view it.
 
 - [] I can edit these recipes.
+
+  - [] Use a modal.
 
 - [x] I can delete these recipes.
 
