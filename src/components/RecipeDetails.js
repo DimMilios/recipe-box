@@ -10,9 +10,9 @@ function RecipeDetails({ title, ingredients, directions }) {
           <div>
             <h3>Ingredients</h3>
             <ul>
-              {ingredients[0].description.map(description => (
+              {ingredients.map(ingredient => (
                 <li key={crypto.getRandomValues(new Uint8Array(30)).toString()}>
-                  {description}
+                  {ingredient}
                 </li>
               ))}
             </ul>

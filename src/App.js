@@ -29,7 +29,7 @@ function App() {
 
     const recipeToAdd = {
       title: name,
-      ingredients: [{ description: ingredients.split('\\') }],
+      ingredients: ingredients.split('\\'),
       directions: directions.split('\\'),
     };
     console.log('new recipe', recipeToAdd);

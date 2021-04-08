@@ -2,13 +2,13 @@ export const recipes = [
   {
     title: 'Stir Fried Chicken with an Orange Sauce',
     ingredients: [
-      { ingredient: 'chicken', description: 'Chicken (a pound or two)' },
-      { ingredient: 'orange', description: 'oranges' },
-      { ingredient: 'onion', description: 'An Onion' },
-      { ingredient: 'red_bell_pepper', description: 'Two Red Bell Peppers' },
-      { ingredient: 'soy_sauce', description: 'Soy Sauce' },
-      { ingredient: 'honey', description: 'Honey' },
-      { ingredient: 'flour', description: 'Flour' },
+      'Chicken (a pound or two)',
+      'Oranges',
+      'An Onion',
+      'Two Red Bell Peppers',
+      'Soy Sauce',
+      'Honey',
+      'Flour',
     ],
     directions: [
       'Chop your onion and red bell peppers into small bits and throw them in a large frying pan to cook with a pat of butter, stirring occasionally.',
@@ -23,14 +23,14 @@ export const recipes = [
   {
     title: 'Egg Roll in a Bowl',
     ingredients: [
-      { ingredient: 'ground_turkey', description: '1 pound ground turkey' },
-      { ingredient: 'coleslaw', description: '1 bag coleslaw mix' },
-      { ingredient: 'onion', description: '1 small onion' },
-      { ingredient: 'garlic', description: '2-3 cloves of garlic' },
-      { ingredient: 'ginger', description: '1 tbsp fresh ginger' },
-      { ingredient: 'hoisin_sauce', description: '1/4 cup Hoisin sauce' },
-      { ingredient: 'soy_sauce', description: 'soy sauce' },
-      { ingredient: 'sesame_oil', description: 'sesame oil' },
+      '1 pound ground turkey',
+      '1 bag coleslaw mix',
+      '1 small onion',
+      '2-3 cloves of garlic',
+      '1 tbsp fresh ginger',
+      '1/4 cup Hoisin sauce',
+      'soy sauce',
+      'sesame oil',
     ],
     directions: [
       'Grate or mince ginger finely. Process with the garlic cloves by grinding with salt under the edge of a knife. Finely mince the onion. Optional Marinade the ground turkey in 2 Tbsp of soy sauce and 1 tsp baking soda for 15 minutes to improve browning.',
@@ -42,12 +42,12 @@ export const recipes = [
   {
     title: 'Baked Salmon',
     ingredients: [
-      { ingredient: 'salmon_steaks', description: 'Salmon Steaks' },
-      { ingredient: 'red_pepper_flakes', description: 'Red Pepper Flakes' },
-      { ingredient: 'lemon_juice', description: 'Lemon Juice' },
-      { ingredient: 'butter', description: 'Butter' },
-      { ingredient: 'cooking_oil', description: 'Cooking oil / spray' },
-      { ingredient: 'aluminum_foil', description: 'Aluminum Foil' },
+      'Salmon Steaks',
+      'Red Pepper Flakes',
+      'Lemon Juice',
+      'Butter',
+      'Cooking oil / spray',
+      'Aluminum Foil',
     ],
     directions: [
       'Season salmon with salt, black pepper, and red pepper to taste.',
