@@ -15,7 +15,7 @@ function App() {
     setRecipes(
       Object.entries(localStorage).reduce((array, [key, value]) => {
         if (key in array || !key?.startsWith(prefix)) return [];
-        return array.concat(JSON.parse(value));
+        return array.concat({ localStorageKey: key, ...JSON.parse(value) });
       }, [])
     );
   }, []);
@@ -51,9 +51,22 @@ function App() {
     setDirections(event.currentTarget.value);
   };
 
+  const handleDelete = title => {
+    const recipeToDelete = recipes.find(recipe => recipe.title === title);
+
+    if (recipeToDelete) {
+      localStorage.removeItem(recipeToDelete.localStorageKey);
+      setRecipes(
+        recipes.filter(
+          recipe => recipe.localStorageKey !== recipeToDelete.localStorageKey
+        )
+      );
+    }
+  };
+
   return (
     <div>
-      <RecipeList recipes={recipes} />
+      <RecipeList recipes={recipes} handleDelete={handleDelete} />
 
       <AddRecipe
         name={name}
