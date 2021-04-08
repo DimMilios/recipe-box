@@ -1,6 +1,5 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-// import { recipes as recipeData } from './recipes';
 import RecipeList from './components/RecipeList';
 import AddRecipe from './components/AddRecipe';
 
@@ -10,11 +9,9 @@ function App() {
   const [ingredients, setIngredients] = useState('');
   const [directions, setDirections] = useState('');
 
-  const prefix = '_username_recipes';
+  const prefix = '_fcce5c90958-c559-42db-9fca-cc42317b48f8_recipes';
 
   useEffect(() => {
-    // setRecipes(recipeData);
-
     setRecipes(
       Object.entries(localStorage).reduce((array, [key, value]) => {
         if (key in array || !key?.startsWith(prefix)) return [];
