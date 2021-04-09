@@ -3,16 +3,18 @@ import { useState, useEffect } from 'react';
 import RecipeList from './components/RecipeList';
 import { recipes as data } from './recipes';
 import AddRecipe from './components/AddRecipe';
+import { prefix } from './shared';
+import { useForm } from './hooks/useForm';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [loadedRecipes, setLoadedRecipes] = useState(false);
 
-  const [name, setName] = useState('');
-  const [ingredients, setIngredients] = useState('');
-  const [directions, setDirections] = useState('');
-
-  const prefix = '_fcce5c90958-c559-42db-9fca-cc42317b48f8_recipes';
+  const {
+    state: { title, ingredients, directions },
+    setValue,
+    clearForm,
+  } = useForm({ title: '', ingredients: '', directions: '' });
 
   useEffect(() => {
     const storedRecipes = Object.entries(localStorage).reduce(
@@ -28,39 +30,31 @@ function App() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(name, ingredients, directions);
+    console.log(title, ingredients, directions);
 
     const recipeToAdd = {
-      title: name,
+      title,
       ingredients: ingredients.split('\\'),
       directions: directions.split('\\'),
     };
     console.log('new recipe', recipeToAdd);
 
-    localStorage.setItem(`${prefix}-${name}`, JSON.stringify(recipeToAdd));
+    localStorage.setItem(`${prefix}-${title}`, JSON.stringify(recipeToAdd));
 
-    setRecipes([...recipes, recipeToAdd]);
-    setName('');
-    setIngredients('');
-    setDirections('');
-  };
-
-  const handleNameChange = event => {
-    setName(event.currentTarget.value);
-  };
-
-  const handleIngredientsChange = event => {
-    setIngredients(event.currentTarget.value);
-  };
-
-  const handleDirectionsChange = event => {
-    setDirections(event.currentTarget.value);
+    setRecipes([
+      ...recipes,
+      { localStorageKey: `${prefix}-${title}`, ...recipeToAdd },
+    ]);
+    clearForm();
   };
 
   const handleDelete = title => {
     const recipeToDelete = recipes.find(recipe => recipe.title === title);
 
-    if (recipeToDelete) {
+    if (
+      recipeToDelete &&
+      window.confirm(`Are you sure you want to delete ${title}?`)
+    ) {
       localStorage.removeItem(recipeToDelete.localStorageKey);
       setRecipes(
         recipes.filter(
@@ -80,16 +74,18 @@ function App() {
 
   return (
     <>
-      <RecipeList recipes={recipes} handleDelete={handleDelete} />
+      <RecipeList
+        recipes={recipes}
+        setRecipes={setRecipes}
+        handleDelete={handleDelete}
+      />
 
       <AddRecipe
-        name={name}
+        handleSubmit={handleSubmit}
+        title={title}
         ingredients={ingredients}
         directions={directions}
-        handleSubmit={handleSubmit}
-        handleNameChange={handleNameChange}
-        handleIngredientsChange={handleIngredientsChange}
-        handleDirectionsChange={handleDirectionsChange}
+        setValue={setValue}
       />
 
       <button onClick={handleLoadRecipes}>Load recipes from file</button>
